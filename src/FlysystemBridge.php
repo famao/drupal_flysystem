@@ -48,9 +48,9 @@ class FlysystemBridge extends FlysystemStreamWrapper implements StreamWrapperInt
    */
   public function getDirectoryPath() {
     $scheme = $this->getProtocol();
-    $base_path = (string) $this->getFactory()->getSettings($scheme)['base_path'];
-    
-    return $base_path !== '' ? $base_path : '';
+    $settings = $this->getFactory()->getSettings($scheme);
+
+    return isset($settings['base_path']) ?  $settings['base_path'] : '';
   }
 
   /**
