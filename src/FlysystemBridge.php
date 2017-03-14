@@ -44,6 +44,16 @@ class FlysystemBridge extends FlysystemStreamWrapper implements StreamWrapperInt
   }
 
   /**
+   * In order to replace 'private://', 'public://' schema, we need getDirectoryPath
+   */
+  public function getDirectoryPath() {
+    $scheme = $this->getProtocol();
+    $base_path = (string) $this->getFactory()->getSettings($scheme)['base_path'];
+    
+    return $base_path !== '' ? $base_path : '';
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function getUri() {
